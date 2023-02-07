@@ -8,11 +8,12 @@ from sklearn.metrics import confusion_matrix, precision_recall_curve, roc_curve,
 
 
 # Plots
+
+# Loss vs Iterations
 def loss_v_iteration_curve(epochs, training_loss_list, test_loss_list, title):
     epoch_count = range(1, epochs + 1)
 
 
-    # Visualize loss history
     plt.plot(epoch_count, training_loss_list, 'r', label="Training Loss")
     plt.plot(epoch_count, test_loss_list, 'b', label="Validation Loss")
     plt.xlabel('Epoch')
@@ -21,7 +22,7 @@ def loss_v_iteration_curve(epochs, training_loss_list, test_loss_list, title):
     plt.show()
     plt.close()
 
-
+# AUC vs Iterations -> To see how well the model performs over time
 def auc_v_iterations_curve(epochs, training_auc_list, test_auc_list, title):
     epoch_count = range(1, epochs + 1)
 
@@ -33,7 +34,7 @@ def auc_v_iterations_curve(epochs, training_auc_list, test_auc_list, title):
     plt.savefig(title)
     plt.close()
 
-
+# AUC Curve
 def auc_curve_plot(y_test, y_pred, title):
     fpr, tpr, thresholds = roc_curve(y_test, y_pred)
 
@@ -49,7 +50,7 @@ def auc_curve_plot(y_test, y_pred, title):
     plt.savefig(title)
     plt.close()
 
-
+# Precision vs Recall
 def precision_recall_curve_plot(y_test, y_pred, title):
     precision, recall, thresholds = precision_recall_curve(y_test, y_pred)
 
@@ -62,6 +63,8 @@ def precision_recall_curve_plot(y_test, y_pred, title):
     plt.savefig(title)
     plt.close()
 
+# Analize mean and STD
+# Reads all the files and gets the mean and STD for each metric
 def analize_mean_std(name, training, validation):
 
 
@@ -98,7 +101,7 @@ def analize_mean_std(name, training, validation):
 
 
 
-
+# Initialize method
 def load_data_and_plot(history_dir, predictions_dir, epochs, model_name):
     metrics = {
         'loss': {},
@@ -206,6 +209,7 @@ def load_data_and_plot(history_dir, predictions_dir, epochs, model_name):
 
     predictions_arr = []
 
+    # Precision vs Recall - MEAN
     for file in os.listdir(predictions_dir):
         if os.path.isfile(os.path.join(predictions_dir, file)):
             file = open(os.path.join(predictions_dir, file), 'rb')
@@ -231,7 +235,7 @@ def load_data_and_plot(history_dir, predictions_dir, epochs, model_name):
     plt.savefig("PREvsREC_Project2CNN")
     plt.close()
 
-    #ROCAUC
+    # ROCAUC - MEAN
     plt.figure(3)
     plt.xlabel('FPR')
     plt.ylabel('TPR')
@@ -260,6 +264,8 @@ def load_data_and_plot(history_dir, predictions_dir, epochs, model_name):
     plt.savefig("ROCAUC_Project2CNN.png")
     plt.close()
 
+
+# Constants
 history_path = "./Histories/Histories_Model2"
 predictions_path = "./Predictions/Predictions_Model2"
 model_name = "Project2CNN"

@@ -27,18 +27,22 @@ def custom_preprocessing(image):
 
     return normalized
 
-
+# Constants
 image_size = (128, 128)
 batch_size = 32
 image_dir = "../../../Proyecto Integrador/scripts/dataset3/test"
 selected_model_path = "./Checkpoints/saved-model-150.hdf5"
 test_datagen = ImageDataGenerator(preprocessing_function=custom_preprocessing)
 
+
+# Load selected model
 def load_model(selected_model_path):
     selected_model = keras.models.load_model(selected_model_path)
 
     return selected_model
 
+# Make Predictions to measure metrics
+# Loads the test set and gets the metrics
 def make_predictions(test_dataframe):
     test_data_generator = test_datagen.flow_from_dataframe(dataframe=test_dataframe, directory=image_dir,
                                                             x_col="filename", y_col="label",
@@ -78,8 +82,10 @@ def make_predictions(test_dataframe):
     return current_results
 
 
-test_data = pd.read_csv(f"{image_dir}/labels.csv")
-
 
 if __name__ == "__main__":
+    # Gets the names and labels of the test set and loads them into a DataFrame for further use
+    test_data = pd.read_csv(f"{image_dir}/labels.csv")
+
+    # Initialize method
     make_predictions(test_data)
