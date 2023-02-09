@@ -18,3 +18,8 @@
 ---
 
 Cada archivo tiene su método ```if __name__=="__main__":``` para ejecutar el respectivo **script**. Revisar en las constantes de cada archivo los *paths* para que funcione. 
+
+El dataset utilizado puede ser visto en el siguiente link: 
+[melanoma-classification-dataset](https://estudusfqedu-my.sharepoint.com/:f:/g/personal/jmcadenaz_estud_usfq_edu_ec/Engte5NXd3JGq_ELC8CLPjoBiCB_NVL_zOPtgD0uFYeD7g?e=bFQ6dw). El dataset se divide en dos carpetas, ```train``` y ```test```. Dentro de cada una de estas, se encuentran las fotografías y un archivo llamado ```labels.csv```, el cual se lee como un dataframe para los generadores de Keras. 
+
+*Importante: Al descargar el dataset y correr el proyecto, actualizar los paths correspondientes.*
