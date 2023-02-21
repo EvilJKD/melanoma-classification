@@ -20,7 +20,7 @@ from tensorflow.keras.optimizers import Adam
 
 
 
-from sklearn.model_selection import StratifiedKFold
+from sklearn.model_selection import RepeatedStratifiedKFold
 from sklearn.metrics import auc
 
 
@@ -137,7 +137,7 @@ def run_model_n1():
     model_name = "Model1"
     
 
-    skf = StratifiedKFold(n_splits = 10) # Stratified 10 Cross Fold
+    skf = RepeatedStratifiedKFold(n_splits=10, n_repeats=3, random_state=None) #Repeated Stratified 10 Cross Fold
     fold = 1
     
     for train_idx, val_idx in skf.split(np.zeros(len(Y)), Y): # No es necesario saber los X, sino solo los Y, puesto que es estratificado
